@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sheet"
 
 import Link from "next/link";
+import Footer from "./Footer";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
@@ -88,7 +89,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
               </nav>
             </SheetClose>
 
-            FOOTER
+            <Footer user={user} type='mobile' />
           </div>
         </SheetContent>
       </Sheet>

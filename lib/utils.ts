@@ -1,11 +1,31 @@
 /* eslint-disable no-prototype-builtins */
 import { type ClassValue, clsx } from "clsx";
+import { z } from "zod";
 import qs from "query-string";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export type AuthActionType = 'sign-in' | 'sign-up';
+
+export const authFormSchema = (type: AuthActionType) => z.object({
+  // sign up and sign in
+  firstName: type === 'sign-up' ? z.string().min(3) : z.string().optional(),
+  lastName: type === 'sign-up' ? z.string().min(3) : z.string().optional(),
+  address1: type === 'sign-up' ? z.string().min(3).max(50) : z.string().optional(),
+  city: type === 'sign-up' ? z.string().min(3).max(50) : z.string().optional(),
+  state: type === 'sign-up' ? z.string().min(2).max(2) : z.string().optional(),
+  postalCode: type === 'sign-up' ? z.string().min(3).max(6) : z.string().optional(),
+  dateOfBirth: type === 'sign-up' ? z.string().min(3) : z.string().optional(),
+  ssn: type === 'sign-up' ? z.string().min(3) : z.string().optional(),
+  // sign in 
+  email: z.string().email(),
+  password: z.string().min(8, {
+    message: 'password must be at least 8 characters long'
+  }),
+});
 
 // FORMAT DATE TIME
 export const formatDateTime = (dateString: Date) => {

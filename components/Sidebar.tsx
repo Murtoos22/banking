@@ -1,7 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import Footer from './Footer';
+import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 import { sidebarLinks } from '@/constants';
@@ -54,7 +55,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
         USER
       </nav>
 
-      FOOTER
+      <Footer user ={user} type='desktop'/>
     </section>
   );
 };
